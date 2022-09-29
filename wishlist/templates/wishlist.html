@@ -1,6 +1,28 @@
 {% extends 'base.html' %}
 
 {% block content %}
+
+<style>
+    body{
+        background-color: white;
+    }
+
+    .container-fluid{
+        background-color: white;
+    }
+
+    table{
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    th{
+        padding: 10px;
+        align-items: center;
+        border: 1px solid;
+    }
+</style>
+
 <nav class="navbar navbar-expand-lg bg-light">
     <div class="container-fluid">
       <a class="navbar-brand" href="#">Navbar</a>
@@ -39,7 +61,7 @@
   </nav>
 
 
-<h5>Nama: </h5>
+<h5>Nama: </h5> 
 <b>{{nama}}</b>
 
 <table>
