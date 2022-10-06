@@ -1,0 +1,115 @@
+{% extends 'base.html' %}
+<script>
+$(document).ready(function(){
+  $("button").click(function(){
+    $.get("intitial_wishlist_data.json"){
+      $("")
+    });
+  });
+</script>
+
+{% block content %}
+
+<style>
+    body{
+        background-color: white;
+    }
+
+    .container-fluid{
+        background-color: white;
+    }
+
+    table{
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    th{
+        padding: 10px;
+        align-items: center;
+        border: 1px solid;
+    }
+</style>
+
+<nav class="navbar navbar-expand-lg bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Navbar</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="https://wishlist99.herokuapp.com/wishlist">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">{{nama}}</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link logout" href="{% url 'wishlist:logout' %}">Logout</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Dropdown
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">Action</a></li>
+              <li><a class="dropdown-item" href="#">Another action</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="#">Something else here</a></li>
+            </ul>
+          </li>
+        </ul>
+        <form class="d-flex" role="search">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+      </div>
+    </div>
+  </nav>
+
+
+<h5>Nama: </h5> 
+<b>{{nama}}</b>
+
+<table>
+    <tr>
+    <th>Nama Barang</th>
+    <th>Harga Barang</th>
+    <th>Deskripsi</th>
+    </tr>
+    
+    {% comment %} Tambahkan data di bawah baris ini {% endcomment %}
+    {% for barang in list_barang %}
+    <tr>
+        <th>{{barang.nama_barang}}</th>
+        <th>{{barang.harga_barang}}</th>
+        <th>{{barang.deskripsi}}</th>
+    </tr>
+    {% endfor %}
+
+</table>
+
+<button type="submit">Get data</button>
+
+<table>
+  <form method="POST">
+      {% csrf_token %}
+      <tr>
+        <td>{{input_form}}</td>
+      </tr>
+      <tr>
+        <td><input type="submit" value="add data"></td>
+      </tr>
+  </form>
+
+</table>
+
+
+
+
+<h5>Sesi terakhir login: {{ last_login }}</h5>
+<!-- 
+<button><a href="{% url 'wishlist:logout' %}">Logout</a></button> -->
+
+{% endblock content %}

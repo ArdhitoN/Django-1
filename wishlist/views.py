@@ -18,6 +18,7 @@ import datetime
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 
+from .forms import Input_Form
 
 
 # Create your views here.
@@ -84,3 +85,19 @@ def logout_user(request):
     response = HttpResponseRedirect(reverse('wishlist:login'))
     response.delete_cookie('last_login')
     return response
+
+
+def add_data(request):
+    response = {'input_form' : Input_Form}
+    if request.method == 'POST':
+        user = request.user
+        form = Input_Form(request.POST or None)
+        # form.instance.date = datetime.datetime.now()
+        # form.instance.user = user
+        if(form.is_valid and request.method == 'POST'):
+            form.save()
+            # return HttpResponseRedirect('/todolist')
+        # else:
+        #     return HttpResponseRedirect('/todolist')
+    
+    return render(request, 'wishlist_ajax.html', response)
